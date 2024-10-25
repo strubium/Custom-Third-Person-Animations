@@ -1,0 +1,12 @@
+{
+  "animations": {
+    "hold_gun": {
+      "keyframes": [
+        { "time": 0, "rotation": { "rightArm": { "x": 1.2, "y": 0.0, "z": 0.0 }, "leftArm": { "x": -0.5, "y": 0.0, "z": 0.0 } } },
+        { "time": 5, "rotation": { "rightArm": { "x": 0.5, "y": 0.0, "z": 0.0 }, "leftArm": { "x": -1.2, "y": 0.0, "z": 0.0 } } },
+        { "time": 10, "rotation": { "rightArm": { "x": 0.0, "y": 0.0, "z": 0.0 }, "leftArm": { "x": 0.0, "y": 0.0, "z": 0.0 } } }
+      ],
+      "duration": 60
+    }
+  }
+}
