@@ -28,7 +28,7 @@ public class AnimationEventHandler {
             modelField = RenderLivingBase.class.getDeclaredField("mainModel");
             modelField.setAccessible(true);
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            ExampleMod.LOGGER.error("Error loading mainModel");
         }
     }
 
@@ -41,8 +41,8 @@ public class AnimationEventHandler {
         }
 
         // Define animations for specific items
-        itemAnimationMap.put("minecraft:diamond_sword", "sword_idle_animation");
-        itemAnimationMap.put("minecraft:bow", "bow_hold_animation");
+//        itemAnimationMap.put("minecraft:diamond_sword", "sword_idle_animation");
+//        itemAnimationMap.put("minecraft:bow", "bow_hold_animation");
     }
 
     @SubscribeEvent
