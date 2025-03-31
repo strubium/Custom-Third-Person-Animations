@@ -35,6 +35,7 @@ public class CustomAnimationLoader {
     static class AnimationData {
         public List<Keyframe> keyframes; // List of keyframes for complex animations
         public int duration; // Duration of the animation in ticks
+        public boolean loop = false; // Whether the animation should loop or stop at the last frame
     }
 
     static class Keyframe {

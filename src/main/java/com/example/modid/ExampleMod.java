@@ -25,7 +25,7 @@ public class ExampleMod {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new EventHandler());
+        MinecraftForge.EVENT_BUS.register(new AnimationEventHandler());
     }
 
 }
