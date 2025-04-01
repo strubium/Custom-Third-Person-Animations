@@ -1,10 +1,12 @@
-package com.example.modid;
+package com.strubium.custom_animation_mod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -17,24 +19,23 @@ import java.util.Map;
 public class AnimationEventHandler {
 
     private CustomModelPlayer customModel;
-    private static Field modelField;
     private boolean inventoryOpen = false;
     private int resetDelay = 0;
 
-    private final Map<String, String> itemAnimationMap = new HashMap<>();
+    private static final Map<String, String> itemAnimationMap = new HashMap<>();
 
-    static {
-        try {
-            modelField = RenderLivingBase.class.getDeclaredField("mainModel");
-            modelField.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            ExampleMod.LOGGER.error("Error loading mainModel");
-        }
+    public static void addAnimation(Item item, String animation){
+        itemAnimationMap.put(item.getRegistryName().toString(), animation);
     }
+
+    public static void addAnimation(String itemRegName, String animation){
+        itemAnimationMap.put(itemRegName, animation);
+    }
+
 
     public AnimationEventHandler() {
         try {
-            Map<String, CustomAnimationLoader.AnimationData> animations = CustomAnimationLoader.loadAnimations("animations/animation.json");
+            Map<String, CustomAnimationLoader.AnimationData> animations = CustomAnimationLoader.loadAnimations(new ResourceLocation(Tags.MOD_ID, "animations/animation.json"));
             customModel = new CustomModelPlayer(0.0F, false, animations);
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,22 +48,18 @@ public class AnimationEventHandler {
 
     @SubscribeEvent
     public void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
-        try {
-            if (modelField != null) {
-                modelField.set(event.getRenderer(), customModel);
-            }
+        if (event.getRenderer() instanceof RenderLivingBase) {
+            ((RenderLivingBase<?>) event.getRenderer()).mainModel = customModel;
+        }
 
-            EntityPlayer player = event.getEntityPlayer();
-            ItemStack heldItem = player.getHeldItemMainhand();
+        EntityPlayer player = event.getEntityPlayer();
+        ItemStack heldItem = player.getHeldItemMainhand();
 
-            if (heldItem != null && heldItem.getItem().getRegistryName() != null) {
-                String animation = itemAnimationMap.get(heldItem.getItem().getRegistryName().toString());
-                if (animation != null) {
-                    customModel.setActiveAnimation(animation);
-                }
+        if (!heldItem.isEmpty() && heldItem.getItem().getRegistryName() != null) {
+            String animation = itemAnimationMap.get(heldItem.getItem().getRegistryName().toString());
+            if (animation != null) {
+                customModel.setActiveAnimation(animation);
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
         }
     }
 

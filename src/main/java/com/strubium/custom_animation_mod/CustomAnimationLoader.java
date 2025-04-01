@@ -1,4 +1,4 @@
-package com.example.modid;
+package com.strubium.custom_animation_mod;
 
 import com.google.gson.Gson;
 import net.minecraft.client.Minecraft;
@@ -12,12 +12,12 @@ import java.util.Map;
 
 public class CustomAnimationLoader {
 
-    public static Map<String, AnimationData> loadAnimations(String resourcePath) throws IOException {
+    public static Map<String, AnimationData> loadAnimations(ResourceLocation resourceLocation) throws IOException {
         Gson gson = new Gson();
 
         // Load from the resource pack
         InputStream inputStream = Minecraft.getMinecraft().getResourceManager()
-                .getResource(new ResourceLocation("modid", resourcePath)).getInputStream();
+                .getResource(resourceLocation).getInputStream();
 
         AnimationContainer animations = gson.fromJson(new InputStreamReader(inputStream), AnimationContainer.class);
         inputStream.close();

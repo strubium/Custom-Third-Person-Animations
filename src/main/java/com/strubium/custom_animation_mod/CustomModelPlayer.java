@@ -1,4 +1,4 @@
-package com.example.modid;
+package com.strubium.custom_animation_mod;
 
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.entity.Entity;
