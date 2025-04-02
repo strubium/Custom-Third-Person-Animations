@@ -57,8 +57,8 @@ public class AnimationEventHandler {
 
     @SubscribeEvent
     public void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
-        if (event.getRenderer() instanceof RenderLivingBase) {
-            ((RenderLivingBase<?>) event.getRenderer()).mainModel = customModel;
+        if (event.getRenderer() != null) {
+            event.getRenderer().mainModel = customModel;
         }
 
         EntityPlayer player = event.getEntityPlayer();
