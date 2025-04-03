@@ -2,7 +2,9 @@ package com.strubium.custom_animation_mod;
 
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,12 +25,22 @@ public class CustomModelPlayer extends ModelPlayer {
         }
     }
 
+    public CustomModelPlayer() {
+        super(0.0f, false);
+        try {
+            this.animations.putAll(CustomAnimationLoader.loadAnimations(new ResourceLocation(Tags.MOD_ID, "animations/animation.json")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     // Set the current active animation, with support for stopping animations
     public void setActiveAnimation(String animationName) {
-        if (animationName == null || !animations.containsKey(animationName)) {
+        if (animationName == null) {
             activeAnimation = null;
             keyframes = null;
-            return; // Stop playing animation
+            return;
         }
 
         if (!animationName.equals(activeAnimation)) {
@@ -37,7 +49,7 @@ public class CustomModelPlayer extends ModelPlayer {
             this.keyframes = animationData.keyframes;
             this.duration = animationData.duration;
             this.animationProgress = 0;
-            this.loopAnimation = animationData.loop; // Set loop flag based on animation data
+            this.loopAnimation = animationData.loop;
         }
     }
 
