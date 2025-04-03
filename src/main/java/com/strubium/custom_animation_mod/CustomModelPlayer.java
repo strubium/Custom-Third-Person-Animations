@@ -3,12 +3,15 @@ package com.strubium.custom_animation_mod;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SideOnly(Side.CLIENT)
 public class CustomModelPlayer extends ModelPlayer {
     private final Map<String, CustomAnimationLoader.AnimationData> animations = new HashMap<>();
     private String activeAnimation = null;

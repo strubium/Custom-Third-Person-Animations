@@ -15,7 +15,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class AnimationEventHandlerClient {
 

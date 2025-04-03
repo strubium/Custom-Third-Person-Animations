@@ -5,7 +5,6 @@ import com.strubium.custom_animation_mod.CustomModelPlayer;
 import com.strubium.custom_animation_mod.AnimationEventHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
